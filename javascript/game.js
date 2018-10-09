@@ -4,24 +4,36 @@ var solutions = ["galaga", "frogger", "centipede", "paperboy", "tetris", "rampag
 var answer = [];
 var wrongGuesses = [];
 var guess;
+var computerChoice;
 var answerText = document.getElementById("answer");
 var missedText = document.getElementById("missedLetters");
 var livesText = document.getElementById("lives");
+var gameText = document.getElementById("gameText");
 var backgroundMusic = new Audio("./audio/background.mp3");
 
-
+function newGame() {
+    lives = 3;
     // Choose a solution
-var computerChoice = solutions[Math.floor(Math.random() * solutions.length)];
-console.log("Solution is " + computerChoice);
-console.log("Current lives: " + lives);
+    computerChoice = solutions[Math.floor(Math.random() * solutions.length)];
+    console.log("Solution is " + computerChoice);
+    console.log("Current lives: " + lives);
 
-    // Write underscores to the "answer" array matching the number of characters in the solution
-for (var i = 0; i < computerChoice.length; i++) {
-    answer[i] = "_";
+    backgroundMusic.play();
+
+        // Write underscores to the "answer" array matching the number of characters in the solution
+    for (var i = 0; i < computerChoice.length; i++) {
+        answer[i] = "_";
+    }
+    console.log("Answer array is: " + answer);
+    wrongGuesses = [];
+    missedText.textContent = wrongGuesses;
+    gameText.textContent = "Press any key to guess a letter!";
+    answerText.textContent = answer.join(' ');
+    livesText.textContent = lives;
 }
-console.log("Answer array is: " + answer);
-answerText.textContent = answer.join(' ');
-livesText.textContent = lives;
+
+document.getElementById("startButton").onclick = function() {newGame()};
+document.getElementById("resetButton").onclick = function() {newGame()};
 
 function gameLogic() {
     // For loop to check all letters in computerChoice, if keypress is correct, update "answer" array.
@@ -47,25 +59,24 @@ function gameLogic() {
     } else {
     }
 }
+
+
+
     // Key listener
     document.onkeyup = function(event) {
-        backgroundMusic.play();
         if (lives > 0) {
         // Assign keystroke to variable
             guess = event.key;
             console.log("User pressed key: " + guess);
-
-            // Alphabet upper case
+        // Alphabet upper case
             if (event.keyCode >= 65 && event.keyCode <= 90) {
                 guess = guess.toLowerCase();
                 gameLogic();
-            // Alphabet lower case
+        // Alphabet lower case
             } else if (event.keyCode >= 97 && event.keyCode <= 122) {
                 gameLogic();
             } else {
                 alert("You didn't type a letter!  Try again!");
-            }
-
-            
+            } 
+        }
     }
-}

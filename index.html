@@ -16,14 +16,14 @@
             <img src="images/space_invader_left.png">
         </div>
         <div class="col-1 border border-dark">
-            <img src="images/greenbutton.png">
+            <input type="image" id="startButton" alt="Start" src="images/greenbutton.png">
             <span id="startText">START</span>
         </div>
         <div class="col-8 border border-dark">
             <span id="headerText">80's ARCADE HANGMAN</span>
         </div>
         <div class="col-1 border border-dark">
-            <img src="images/redbutton.png">
+            <input type="image" id="resetButton" alt="Reset" src="images/redbutton.png">
             <span id="resetText">RESET</span>
         </div>
         <div class="col-1 border border-dark">
@@ -34,7 +34,7 @@
     <div class = "container">
         <!-- Row containing puzzle -->
         <div class="row border border-dark" id="puzzle">
-            <p class="answer">Press any key to guess a letter!</p>
+            <p class="answer" id="gameText">Click the Start Button to Play!</p>
             <p class="answer" id="answer"></p>
         </div>
         <!-- Row containing lives, hint images, and letters missed -->
