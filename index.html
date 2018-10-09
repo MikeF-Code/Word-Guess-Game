@@ -11,31 +11,49 @@
 
 <body>
     <!-- Header row containing marquee and controls -->
-    <div class="row">
-        <div class="col-1">
-            
+    <div class="row border border-dark menu">
+        <div class="col-1 border border-dark">
+            <img src="images/space_invader_left.png">
         </div>
-        <div class="col-1">
-
+        <div class="col-1 border border-dark">
+            <img src="images/greenbutton.png">
+            <span id="startText">START</span>
         </div>
-        <div class="col-8">
-            
+        <div class="col-8 border border-dark">
+            <span id="headerText">80's ARCADE HANGMAN</span>
         </div>
-        <div class="col-1">
-            
+        <div class="col-1 border border-dark">
+            <img src="images/redbutton.png">
+            <span id="resetText">RESET</span>
         </div>
-        <div class="col-1">
-            
+        <div class="col-1 border border-dark">
+            <img src="images/space_invader_right.png">
         </div>
     </div>
     <hr>
-    <!-- Row containing puzzle -->
-    <div class="row">
+    <div class = "container">
+        <!-- Row containing puzzle -->
+        <div class="row border border-dark" id="puzzle">
+            <p class="answer">Press any key to guess a letter!</p>
+            <p class="answer" id="answer"></p>
+        </div>
+        <!-- Row containing lives, hint images, and letters missed -->
+        <div class="row my-2">
+            <div class="col-md-3 border border-dark mx-1">
+                Lives<br>
+                <span class="info" id="lives"></span>
+            </div>
+            <div class="col-md-6 border border-dark" id="hintImage">
 
+            </div>
+            <div class="col-md-2 border border-dark mx-1">
+                Missed Letters<br>
+                <span class="info" id="missedLetters"></span>
+            </div>
+        </div>
     </div>
-    <!-- Row containing lives, hint images, and letters missed -->
-    <div class="row">
-
+    <div class = "page-footer attributions">
+        Vectors by <a target="_blank" href="https://vecteezy.com">Vecteezy!</a>
     </div>
 
     <!-- Javascript -->

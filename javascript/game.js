@@ -4,6 +4,11 @@ var solutions = ["galaga", "frogger", "centipede", "paperboy", "tetris", "rampag
 var answer = [];
 var wrongGuesses = [];
 var guess;
+var answerText = document.getElementById("answer");
+var missedText = document.getElementById("missedLetters");
+var livesText = document.getElementById("lives");
+var backgroundMusic = new Audio("./audio/background.mp3");
+
 
     // Choose a solution
 var computerChoice = solutions[Math.floor(Math.random() * solutions.length)];
@@ -15,9 +20,13 @@ for (var i = 0; i < computerChoice.length; i++) {
     answer[i] = "_";
 }
 console.log("Answer array is: " + answer);
+answerText.textContent = answer.join(' ');
+livesText.textContent = lives;
+
 
     // Key listener
     document.onkeyup = function(event) {
+        backgroundMusic.play();
         if (lives > 0) {
         // Assign keystroke to variable
             guess = event.key;
@@ -29,6 +38,7 @@ console.log("Answer array is: " + answer);
                     answer.splice(j, 1, guess);
                     console.log("Pushed guess: " + guess + " into answer array.");
                     console.log("Current answer array: " + answer);
+                    answerText.textContent = answer.join(' ');
                 } else {
 
                 }
@@ -40,6 +50,9 @@ console.log("Answer array is: " + answer);
                 console.log("Wrong guess!");
                 console.log("Current wrongGuesses array: " + wrongGuesses);
                 console.log("Current lives: " + lives);
+                missedText.textContent = wrongGuesses.join(' ');
+                livesText.textContent = lives;
+
             }
         } 
          else {
