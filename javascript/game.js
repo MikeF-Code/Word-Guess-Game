@@ -89,6 +89,14 @@ function gameLogic() {
         hintImage.innerHTML = "";
         hintImage.innerHTML = "<img src='./images/"+answerID+"-1.png'>";
     }
+
+    if (lives === 0) {
+        gameText.textContent = "You lose!";
+        hintImage.innerHTML = "";
+        hintImage.innerHTML = "<img src='./images/"+answerID+"-complete.png'>";
+        var loseMusic = new Audio("./audio/"+answerID+"-lose.mp3");
+        loseMusic.play();
+    }
 }
 
 
@@ -110,10 +118,5 @@ function gameLogic() {
                 alert("You didn't type a letter!  Try again!");
             } 
         } else {
-            gameText.textContent = "You lose!";
-            hintImage.innerHTML = "";
-            hintImage.innerHTML = "<img src='./images/"+answerID+"-complete.png'>";
-            var loseMusic = new Audio("./audio/"+answerID+"-lose.mp3");
-            loseMusic.play();
         }
     }
