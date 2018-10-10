@@ -1,26 +1,33 @@
-    // Variable Declarations
+// Variable Declarations
 var lives = 3;
 var solutions = ["galaga", "frogger", "centipede", "paperboy", "tetris", "rampage"];
 var answer = [];
 var wrongGuesses = [];
 var guess;
 var computerChoice;
+var answerID;
 var answerText = document.getElementById("answer");
 var missedText = document.getElementById("missedLetters");
 var livesText = document.getElementById("lives");
 var gameText = document.getElementById("gameText");
-var backgroundMusic = new Audio("./audio/background.mp3");
+// Setting up var for the hint/completion images that will cycle based on lives left remaining
+var hintImage = document.getElementById("hintImage");
+var gameStartMusic = new Audio("./audio/gameStart.mp3");
 
 function newGame() {
     lives = 3;
-    // Choose a solution
-    computerChoice = solutions[Math.floor(Math.random() * solutions.length)];
+    answer = [];
+    // Choose a solution Index value
+    answerID = Math.floor(Math.random() * solutions.length);
+    console.log("answerID is: " + answerID);
+    // Write the solution string to the computerChoice array
+    computerChoice = solutions[answerID];
     console.log("Solution is " + computerChoice);
     console.log("Current lives: " + lives);
 
-    backgroundMusic.play();
-
-        // Write underscores to the "answer" array matching the number of characters in the solution
+    gameStartMusic.play();
+    hintImage.innerHTML = "";
+    // Write underscores to the "answer" array matching the number of characters in the solution
     for (var i = 0; i < computerChoice.length; i++) {
         answer[i] = "_";
     }
@@ -36,6 +43,7 @@ document.getElementById("startButton").onclick = function() {newGame()};
 document.getElementById("resetButton").onclick = function() {newGame()};
 
 function gameLogic() {
+
     // For loop to check all letters in computerChoice, if keypress is correct, update "answer" array.
     for (var j = 0; j < computerChoice.length; j++) {
         if(computerChoice[j] === guess){
@@ -57,6 +65,29 @@ function gameLogic() {
         missedText.textContent = wrongGuesses.join(' ');
         livesText.textContent = lives;
     } else {
+
+    }
+    //Win Condition
+    if (answer.indexOf("_", 0) === -1) {
+        gameText.textContent = "You win!";
+        hintImage.innerHTML = "";
+        console.log("Cleared hintImageOK.");
+        hintImage.innerHTML = "<img src='./images/"+answerID+"-complete.png'>";
+        console.log("Replaced hintImage with "+answerID+"-complete.png");
+        var winMusic = new Audio("./audio/"+answerID+"-win.mp3");
+        winMusic.play();
+    } else {
+
+    }
+
+    if (lives===2) {
+        hintImage.innerHTML = "";
+        hintImage.innerHTML = "<img src='./images/"+answerID+"-2.png'>";
+    }
+
+    if (lives===1) {
+        hintImage.innerHTML = "";
+        hintImage.innerHTML = "<img src='./images/"+answerID+"-1.png'>";
     }
 }
 
@@ -78,5 +109,11 @@ function gameLogic() {
             } else {
                 alert("You didn't type a letter!  Try again!");
             } 
+        } else {
+            gameText.textContent = "You lose!";
+            hintImage.innerHTML = "";
+            hintImage.innerHTML = "<img src='./images/"+answerID+"-complete.png'>";
+            var loseMusic = new Audio("./audio/"+answerID+"-lose.mp3");
+            loseMusic.play();
         }
     }
