@@ -51,8 +51,16 @@ function gameLogic() {
             console.log("Pushed guess: " + guess + " into answer array.");
             console.log("Current answer array: " + answer);
             answerText.textContent = answer.join(' ');
-        } else {
-
+                //Win Condition
+            if (answer.indexOf("_", 0) === -1) {
+                hintImage.innerHTML = "";
+                console.log("Cleared hintImageOK.");
+                hintImage.innerHTML = "<img class='img-fluid' src='./images/"+answerID+"-complete.png'>";
+                console.log("Replaced hintImage with "+answerID+"-complete.png");
+                gameText.textContent = "You win!";
+                var winMusic = new Audio("./audio/"+answerID+"-win.mp3");
+                winMusic.play();
+            }
         }
     }
     // Conditional statement to decrement lives and push letter into 
@@ -64,43 +72,21 @@ function gameLogic() {
         console.log("Current lives: " + lives);
         missedText.textContent = wrongGuesses.join(' ');
         livesText.textContent = lives;
-    } else {
-
-    }
-
-    if (lives===2) {
-        hintImage.innerHTML = "";
-        hintImage.innerHTML = "<img class='img-fluid' src='./images/"+answerID+"-2.png'>";
-    }
-
-    if (lives===1) {
-        hintImage.innerHTML = "";
-        hintImage.innerHTML = "<img class='img-fluid' src='./images/"+answerID+"-1.png'>";
-    }
-
-    if (lives === 0) {
-        gameText.textContent = "You lose!";
-        hintImage.innerHTML = "";
-        hintImage.innerHTML = "<img class='img-fluid' src='./images/"+answerID+"-complete.png'>";
-        var loseMusic = new Audio("./audio/"+answerID+"-lose.mp3");
-        loseMusic.play();
-    }
-
-    //Win Condition
-    if (answer.indexOf("_", 0) === -1) {
-        hintImage.innerHTML = "";
-        console.log("Cleared hintImageOK.");
-        hintImage.innerHTML = "<img class='img-fluid' src='./images/"+answerID+"-complete.png'>";
-        console.log("Replaced hintImage with "+answerID+"-complete.png");
-        gameText.textContent = "You win!";
-        var winMusic = new Audio("./audio/"+answerID+"-win.mp3");
-        winMusic.play();
-    } else {
-
+        if (lives===2) {
+            hintImage.innerHTML = "";
+            hintImage.innerHTML = "<img class='img-fluid' src='./images/"+answerID+"-2.png'>";
+        } else if (lives===1) {
+            hintImage.innerHTML = "";
+            hintImage.innerHTML = "<img class='img-fluid' src='./images/"+answerID+"-1.png'>";
+        } else if (lives === 0) {
+            gameText.textContent = "You lose!";
+            hintImage.innerHTML = "";
+            hintImage.innerHTML = "<img class='img-fluid' src='./images/"+answerID+"-complete.png'>";
+            var loseMusic = new Audio("./audio/"+answerID+"-lose.mp3");
+            loseMusic.play();
+        }
     }
 }
-
-
 
     // Key listener
     document.onkeyup = function(event) {
