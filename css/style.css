@@ -16,6 +16,13 @@ body {
     font-size: 60px;
     width: 100%;
     height: 100%;
+    background: -webkit-gradient(linear, 100% 0, 0 0, from(#EDCF01), to(#95000F));
+	background: -webkit-linear-gradient(right, #EDCF01, #95000F);
+	background: -moz-linear-gradient(right, #EDCF01, #95000F);
+	background: -o-linear-gradient(right, #EDCF01, #95000F);
+	background: linear-gradient(right, #EDCF01, #95000F);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 }
 
 .menu input,
