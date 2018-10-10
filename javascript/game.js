@@ -1,5 +1,7 @@
 // Variable Declarations
 var lives = 3;
+var winCount = 0;
+var lossCount = 0;
 var solutions = ["galaga", "frogger", "centipede", "paperboy", "tetris", "rampage"];
 var answer = [];
 var wrongGuesses = [];
@@ -12,9 +14,11 @@ var livesText = document.getElementById("lives");
 var gameText = document.getElementById("gameText");
 // Setting up var for the hint/completion images that will cycle based on lives left remaining
 var hintImage = document.getElementById("hintImage");
+var winCounter = document.getElementById("winCount");
+var lossCounter = document.getElementById("lossCount");
 var gameStartMusic = new Audio("./audio/gameStart.mp3");
 
-function newGame() {
+function startRound() {
     lives = 3;
     answer = [];
     // Choose a solution Index value
@@ -37,10 +41,20 @@ function newGame() {
     gameText.textContent = "Press any key to guess a letter!";
     answerText.textContent = answer.join(' ');
     livesText.textContent = lives;
+    winCounter.textContent = winCount;
+    lossCounter.textContent = lossCount;
 }
 
-document.getElementById("startButton").onclick = function() {newGame()};
-document.getElementById("resetButton").onclick = function() {newGame()};
+function resetGame() {
+    winCount = 0;
+    lossCount = 0;
+    winCounter.textContent = winCount;
+    lossCounter.textContent = lossCount;
+    startRound();
+}
+
+document.getElementById("startButton").onclick = function() {startRound()};
+document.getElementById("resetButton").onclick = function() {resetGame()};
 
 function gameLogic() {
 
@@ -57,13 +71,15 @@ function gameLogic() {
                 console.log("Cleared hintImageOK.");
                 hintImage.innerHTML = "<img class='img-fluid' src='./images/"+answerID+"-complete.png'>";
                 console.log("Replaced hintImage with "+answerID+"-complete.png");
-                gameText.textContent = "You win!";
+                gameText.textContent = "You win! Click the Start button for a new round!";
                 var winMusic = new Audio("./audio/"+answerID+"-win.mp3");
                 winMusic.play();
+                winCount++;
+                winCounter.textContent = winCount;
             }
         }
     }
-    // Conditional statement to decrement lives and push letter into 
+    // Conditional statement to decrement lives and push letter into wrongGuesses array.
     if (computerChoice.indexOf(guess, 0) === -1) {
         lives--;
         wrongGuesses.push(guess);
@@ -72,6 +88,7 @@ function gameLogic() {
         console.log("Current lives: " + lives);
         missedText.textContent = wrongGuesses.join(' ');
         livesText.textContent = lives;
+        // Nested Conditional to update hintImage picture based on lives remaining, and to check for loss state.
         if (lives===2) {
             hintImage.innerHTML = "";
             hintImage.innerHTML = "<img class='img-fluid' src='./images/"+answerID+"-2.png'>";
@@ -79,11 +96,13 @@ function gameLogic() {
             hintImage.innerHTML = "";
             hintImage.innerHTML = "<img class='img-fluid' src='./images/"+answerID+"-1.png'>";
         } else if (lives === 0) {
-            gameText.textContent = "You lose!";
+            gameText.textContent = "You lose! Click the Start button for a new round!";
             hintImage.innerHTML = "";
             hintImage.innerHTML = "<img class='img-fluid' src='./images/"+answerID+"-complete.png'>";
             var loseMusic = new Audio("./audio/"+answerID+"-lose.mp3");
             loseMusic.play();
+            lossCount++;
+            lossCounter.textContent = lossCount;
         }
     }
 }
