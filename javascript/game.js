@@ -113,12 +113,9 @@ function gameLogic() {
         // Assign keystroke to variable
             guess = event.key;
             console.log("User pressed key: " + guess);
-        // Alphabet upper case
+        // Alphabet upper case and lower case
             if (event.keyCode >= 65 && event.keyCode <= 90) {
                 guess = guess.toLowerCase();
-                gameLogic();
-        // Alphabet lower case
-            } else if (event.keyCode >= 97 && event.keyCode <= 122) {
                 gameLogic();
             } else {
                 alert("You didn't type a letter!  Try again!");
