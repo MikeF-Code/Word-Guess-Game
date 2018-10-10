@@ -67,35 +67,36 @@ function gameLogic() {
     } else {
 
     }
-    //Win Condition
-    if (answer.indexOf("_", 0) === -1) {
-        gameText.textContent = "You win!";
-        hintImage.innerHTML = "";
-        console.log("Cleared hintImageOK.");
-        hintImage.innerHTML = "<img src='./images/"+answerID+"-complete.png'>";
-        console.log("Replaced hintImage with "+answerID+"-complete.png");
-        var winMusic = new Audio("./audio/"+answerID+"-win.mp3");
-        winMusic.play();
-    } else {
-
-    }
 
     if (lives===2) {
         hintImage.innerHTML = "";
-        hintImage.innerHTML = "<img src='./images/"+answerID+"-2.png'>";
+        hintImage.innerHTML = "<img class='img-fluid' src='./images/"+answerID+"-2.png'>";
     }
 
     if (lives===1) {
         hintImage.innerHTML = "";
-        hintImage.innerHTML = "<img src='./images/"+answerID+"-1.png'>";
+        hintImage.innerHTML = "<img class='img-fluid' src='./images/"+answerID+"-1.png'>";
     }
 
     if (lives === 0) {
         gameText.textContent = "You lose!";
         hintImage.innerHTML = "";
-        hintImage.innerHTML = "<img src='./images/"+answerID+"-complete.png'>";
+        hintImage.innerHTML = "<img class='img-fluid' src='./images/"+answerID+"-complete.png'>";
         var loseMusic = new Audio("./audio/"+answerID+"-lose.mp3");
         loseMusic.play();
+    }
+
+    //Win Condition
+    if (answer.indexOf("_", 0) === -1) {
+        hintImage.innerHTML = "";
+        console.log("Cleared hintImageOK.");
+        hintImage.innerHTML = "<img class='img-fluid' src='./images/"+answerID+"-complete.png'>";
+        console.log("Replaced hintImage with "+answerID+"-complete.png");
+        gameText.textContent = "You win!";
+        var winMusic = new Audio("./audio/"+answerID+"-win.mp3");
+        winMusic.play();
+    } else {
+
     }
 }
 
